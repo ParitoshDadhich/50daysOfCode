@@ -1,7 +1,7 @@
 class Solve {
     int[] findTwoElement(int arr[], int n) {
  
-      // METHOD 1;
+      // METHOD1
       
         int temp[] = new int[n+1];
         Arrays.fill(temp, 0);
