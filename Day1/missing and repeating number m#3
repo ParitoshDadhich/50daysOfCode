@@ -1,0 +1,63 @@
+class Solve {
+    int[] findTwoElement(int arr[], int n) {
+    
+     // METHOD 3;
+    
+    
+        int xor = arr[0];
+        for(int i=1; i<n; i++)
+            xor ^= arr[i];
+            
+        for(int i=1; i<=n; i++)
+            xor ^= i;
+        
+        int setBit = xor & ~(xor-1);
+        
+        int x = 0;    // set bit is not present
+        int y = 0;    // set bit is present;
+        
+        
+        // I am separating array elements into two different buckets according to their set bit;
+        for(int i=0; i<n; i++){
+            if((arr[i]&setBit) != 0)
+                x ^= arr[i];
+            else
+                y ^= arr[i];
+        }
+        
+        
+        // apply xor opperation with numbers from 1 to n according to their set values;
+        for(int i=1; i<=n; i++){
+            if((i&setBit)!=0)
+                x ^= i;
+            
+            else
+                y ^= i;
+                
+        }
+        
+        
+        boolean flagx = false;
+        boolean flagy = false;
+        
+        for(int i=0; i<n; i++){
+            if(arr[i] == x)
+                flagx = true;
+            else if(arr[i] == y)
+                flagy = true;
+        }
+        
+        //System.out.println(x + " " + y);
+        
+        int ans[] = new int[2];
+        
+        ans[0] = flagx == true ? x : (flagy == true ? y : x);
+        ans[1] = flagx == false ? x : (flagy == false ? y : x);
+        
+        return ans;
+        
+      
+        
+        
+    }
+}
