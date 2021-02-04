@@ -1,0 +1,24 @@
+class Solve {
+    int[] findTwoElement(int arr[], int n) {
+ 
+      // METHOD 1;
+      
+        int temp[] = new int[n+1];
+        Arrays.fill(temp, 0);
+        for(int i=0; i<n; i++){
+            temp[arr[i]]++;
+        }
+        
+        int ans[] = new int[2];
+        for(int i=1; i<=n; i++){
+            if(temp[i] == 0)
+                ans[1] = i;
+            else if(temp[i] == 2)
+                ans[0] = i;
+        }
+        
+        
+        return ans;
+        
+    }
+}
