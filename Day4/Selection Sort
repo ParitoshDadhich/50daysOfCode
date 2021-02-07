@@ -42,7 +42,7 @@ public class Runner {
             Solution.selectionSort(input);
             printArray(input);
 
-            t -= 1;
+            t -=1;
         }
     }
 }
