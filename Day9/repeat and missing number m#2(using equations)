@@ -15,6 +15,6 @@ class Solve {
     ans[0] = rep;
     ans[1] = miss;
         
-    return ans;
+   return ans;
    }
 }   
