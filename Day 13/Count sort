@@ -1,0 +1,38 @@
+package intro;
+
+public class countSort {
+
+	private static void sort(int arr[]) {
+		int l = arr.length;
+		int k = arr[0];
+		for(int i=1; i<l; i++)
+			k = Math.max(k, arr[i]);
+		
+		int temp[] = new int[k+1];
+		
+		// finding the frequency of each element;
+		for(int i=0; i<l; i++)
+			temp[arr[i]]++;
+		
+		// modify the temp array which tells the position of an element;
+		for(int i=1; i<temp.length; i++)
+			temp[i] += temp[i-1];
+		
+		// make an auxiliary of size of arr.length;
+		int arr1[] = new int[l];
+		for(int i=0; i<l; i++)
+			arr1[--temp[arr[i]]] =arr[i];
+		
+		for(int i=0; i<l; i++)
+			arr[i] = arr1[i];
+	}
+	
+	public static void main(String[] args) {
+		int arr[] = {3,43,243, 54, 1, 9};
+		sort(arr);
+		for(int i=0; i<arr.length; i++)
+			System.out.print(arr[i] + " ");
+
+	}
+
+}
