@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+public class runner {
+	
+	public static int[] takeInput() {
+		Scanner s = new Scanner(System.in);
+		int size = s.nextInt();
+		int arr[] = new int[size];
+		for (int i = 0; i < size; i++) {
+			arr[i] = s.nextInt();
+		}
+		return arr;
+	}
+	
+	public static void main(String[] args) {
+		int[] input = takeInput();
+		int output[][] = solution.subsets(input);
+		for(int i = 0; i < output.length; i++) {
+			for(int j = 0; j < output[i].length; j++) {
+				System.out.print(output[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+
+
+public class solution {
+	public static int[][] subsets(int input[]) {
+		
+		return helper(input, 0);
+	}
+    
+    private static int[][] helper(int arr[], int sI){
+        
+        // base case;
+        if(sI >= arr.length){
+            int ans[][] = new int[1][0];
+            return ans;
+        }
+        
+        
+        int smallAns[][] = helper(arr, sI+1);
+        int ans[][] = new int[2*smallAns.length][];
+        
+        
+        // first task would be copy the content of smallAns into ans array;
+        int k = 0;
+        int l = smallAns.length;
+        for(int i=0; i<l; i++)
+            ans[k++] = smallAns[i];
+        
+
+        // appending the first element to the ans array and then copying the smallAns array elements to the ans array;
+        for(int i=0; i<l; i++, k++){
+            ans[k] = new int[smallAns[i].length + 1];
+            ans[k][0] = arr[sI];
+            for(int j=1; j<=smallAns[i].length; j++)
+                ans[k][j] = smallAns[i][j-1];
+        }
+        
+        return ans;
+    }
+}
