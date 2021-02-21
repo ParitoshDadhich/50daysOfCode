@@ -28,6 +28,6 @@ public class Solution {
                 return checkAB(str.substring(1));
         }
         
-        return false;
+         return false;
 	}
 }
