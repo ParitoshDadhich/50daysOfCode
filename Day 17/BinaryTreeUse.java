@@ -101,11 +101,72 @@ public class BinaryTreeUse {
 	}
 	
 	
+	public static int countNodes(binaryTreeNode<Integer> root) {
+		if(root == null)
+			return 0;
+		
+		int ans = 1;
+		ans += countNodes(root.left);
+		ans += countNodes(root.right);
+		
+		return ans;
+	}
+	
+	// TIME O(N2)
+	public static int diameterOfBinaryTree(binaryTreeNode<Integer> root) {
+		if(root == null) return 0;
+		
+		// when two deepest nodes are present in left sub tree and right sub tree respectively;
+		int option1 = height(root.left) + height(root.right);
+		
+		// when two deepest nodes are present in left sub tree only;
+		int option2 = diameterOfBinaryTree(root.left);
+		
+		// when two deepest nodes are present in right sub tree only;
+		int option3 = diameterOfBinaryTree(root.right);
+		
+		return Math.max(option1, Math.max(option2, option3));
+	}
+	
+	public static int height(binaryTreeNode<Integer> root) {
+		if(root == null) return 0;
+		
+		return 1 + Math.max(height(root.left), height(root.right));
+	}
+	
+	
+	// TIME O(N)
+	 
+	private static Pair diameterByPair(binaryTreeNode<Integer> root) {
+		if(root == null) {
+			Pair ans = new Pair();
+			ans.height = 0;
+			ans.diameter = 0;
+			return ans;
+		}
+		
+		Pair ans = new Pair();
+		
+		Pair leftOutput = diameterByPair(root.left);
+		Pair rightOutput = diameterByPair(root.right);
+		
+		int option1 = leftOutput.height + rightOutput.height;
+		int option2 = leftOutput.diameter;
+		int option3 = rightOutput.diameter;
+		
+		ans.height = Math.max(leftOutput.height, rightOutput.height) + 1;
+		ans.diameter = Math.max(option1, Math.max(option2, option3));
+		
+		return ans;	
+	}
+	
 	public static void main(String[] args) {
 //		Scanner sc = new Scanner(System.in);
 //		binaryTreeNode<Integer> root = takeInput(sc);
 		binaryTreeNode<Integer> root = takeInputLevelWise();
 		printTreeLevelWise(root);
+		//diameterOfBinaryTree(root);
+		System.out.println("Diameter: " + diameterByPair(root).diameter + ", height: " + diameterByPair(root).height);
 		//sc.close();
 
 	}
