@@ -12,6 +12,28 @@ const getBGColor = (selectedElement) => {
     return window.getComputedStyle(selectedElement).backgroundColor;
 }
 
-var orangeElementColor = getBGColor(orange);
+// var color = getBGColor(orange);
 
-orange.addEventListener('click', callBackFunction);
+// orange.addEventListener('what event you are looking for', 'what you really want to do')
+// orange.addEventListener('mouseenter', () =>{
+//     center.style.backgroundColor = color; 
+// });
+
+// color = getBGColor(pink);
+
+// pink.addEventListener('mouseeneter', () =>{
+//     center.style.backgroundColor = color;
+// });
+
+
+const magicColorChanger = (element, color) => {
+    return element.addEventListener('mouseenter', () => {
+        center.style.backgroundColor = color;
+    });
+}
+
+magicColorChanger(red, getBGColor(red));
+magicColorChanger(cyan, getBGColor(cyan));
+magicColorChanger(violet, getBGColor(violet));
+magicColorChanger(orange, getBGColor(orange));
+magicColorChanger(pink, getBGColor(pink));
